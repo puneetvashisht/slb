@@ -80,6 +80,7 @@ public class EmployeeTest {
 //			}
 //		});
 		
+		printEmployees(employees, (e)->true, (e)->System.out.println(e));
 		printEmployees(employees, (e)->true, System.out::println);
 		
 		System.out.println("-------------Starting with R -----------");
