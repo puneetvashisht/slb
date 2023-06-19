@@ -34,4 +34,11 @@ public class TransferService {
 		transferRepository.execute();
 	}
 
+
+
+	public boolean sendSms() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }
