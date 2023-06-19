@@ -1,5 +1,7 @@
 package com.slb;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class TransferService {
 //		this.transferRepository = transferRepository;
 //	}
 	
+	
+	@PostConstruct
+	public void initalize() {
+		System.out.println("Initialization code goes here....");
+	}
 	
 
 	public TransferRepository getTransferRepository() {

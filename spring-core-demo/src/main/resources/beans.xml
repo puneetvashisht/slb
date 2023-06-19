@@ -11,7 +11,9 @@
  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
  
- <context:component-scan base-package="com.slb"></context:component-scan>
+ <context:component-scan base-package="com.slb, com.slb.aspects"></context:component-scan>
+ <context:annotation-config></context:annotation-config>
+ <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
  
 <!--   <bean id="transferService" class="com.slb.TransferService">
   	<constructor-arg ref="transferRepository"></constructor-arg>

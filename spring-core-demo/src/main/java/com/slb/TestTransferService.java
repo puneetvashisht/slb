@@ -11,7 +11,6 @@ public class TestTransferService {
 		TransferService service = context.getBean(TransferService.class);
 		service.execute();
 		
-		
 //		context.
 
 	}
