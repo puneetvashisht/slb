@@ -5,3 +5,6 @@ test2/*
 .project
 *.class
 .settings
+maven-demo
+maven-demo2
+workout-app

@@ -6,4 +6,5 @@
  *
  */
 module javademo {
+	requires junit;
 }
