@@ -7,19 +7,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.slb.entities.Employee;
 
-
-
 @Repository
-@Transactional
 public class EmployeeRepository {
 
 	@PersistenceContext
 	EntityManager em;
+	
+	@Autowired
+	NewRepository newRepository;
 
 	@Transactional
 	public void addEmployee(Employee emp) {
@@ -38,11 +39,19 @@ public class EmployeeRepository {
 	}
 
 	@Transactional
-	public void updateEmployee(int id, double salary) {
+	public void updateEmployee(int id, double salary){
 		Employee emp = em.find(Employee.class, id);
 		emp.setSalary(salary);
+		newRepository.incrementUpdatedTimes(id);
+		
+		if(salary < 10000) {
+			throw new RuntimeException("Salary cant be less than minimum!");
+		}
 		System.out.println(emp);
+		
 	}
+	
+	
 
 	public Employee findByName(String name) {
 		TypedQuery<Employee> query = em.createNamedQuery("findEmployeeByName", Employee.class);

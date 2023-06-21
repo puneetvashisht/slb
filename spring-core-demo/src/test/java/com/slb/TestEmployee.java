@@ -1,6 +1,7 @@
 package com.slb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -36,11 +37,11 @@ public class TestEmployee {
 		repo.removeEmployee(2);
 	}
 	
-//	@Test
-	public void testUpdatingEmployeeSalary() {
-		repo.updateEmployee(1, 30000d);
-	}
 	@Test
+	public void testUpdatingEmployeeSalary() {
+		assertThrows(RuntimeException.class, ()-> repo.updateEmployee(1, 7700d));
+	}
+//	@Test
 	public void testFindingEmployeeByName() {
 		Employee emp = repo.findByName("Sunaina");
 		assertEquals( emp.getName(), "Sunaina");

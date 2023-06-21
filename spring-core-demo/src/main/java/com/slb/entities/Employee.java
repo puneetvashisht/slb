@@ -41,6 +41,7 @@ public class Employee {
 	}
 
 	Double salary;
+	int timesUpdated;
 	
 
 	public Double getSalary() {
@@ -49,6 +50,16 @@ public class Employee {
 
 	public void setSalary(Double salary) {
 		this.salary = salary;
+	}
+	
+	
+
+	public int getTimesUpdated() {
+		return timesUpdated;
+	}
+
+	public void setTimesUpdated(int timesUpdated) {
+		this.timesUpdated = timesUpdated;
 	}
 
 	@Override
