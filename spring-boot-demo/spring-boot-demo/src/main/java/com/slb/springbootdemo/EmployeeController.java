@@ -22,17 +22,18 @@ import com.slb.springbootdemo.entities.Employee;
 import com.slb.springbootdemo.repos.EmployeeRepository;
 
 @RestController
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
-	@RequestMapping(path = "/employees", method = RequestMethod.GET)
+	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public List<Employee> fetchAllEmployees() {
 		return employeeRepository.findAll();
 	}
 	
-	@PatchMapping("/employees")
+	@PatchMapping("/")
 	public ResponseEntity<Void> updateEmployeeSalary(@RequestBody Employee employee) {
 		System.out.println("Id is : " + employee.getId());
 		ResponseEntity<Void> re = null;
@@ -50,7 +51,7 @@ public class EmployeeController {
 	}
 	
 	
-	@DeleteMapping("/employees/{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteEmployee(@PathVariable("id") int id) {
 		try {
@@ -63,7 +64,7 @@ public class EmployeeController {
 		
 	}
 	
-	@GetMapping("/employees/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Employee> fetchEmployee(@PathVariable("id") int id) {
 		System.out.println("Id is : " + id);
 		ResponseEntity<Employee> re = null;
@@ -77,7 +78,7 @@ public class EmployeeController {
 		return re;
 	}
 	
-	@GetMapping("/employees/findbyname")
+	@GetMapping("/findbyname")
 	public ResponseEntity<Employee> fetchEmployee(@RequestParam("name") String name) {
 		System.out.println("Name is : " + name);
 		ResponseEntity<Employee> re = null;
@@ -91,7 +92,7 @@ public class EmployeeController {
 		return re;
 	}	
 	
-	@RequestMapping(path = "/employees", method = RequestMethod.POST)
+	@RequestMapping(path = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addEmployee(@RequestBody Employee employee) {
 		employeeRepository.save(employee);
