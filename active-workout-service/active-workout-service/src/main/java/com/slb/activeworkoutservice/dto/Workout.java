@@ -9,6 +9,7 @@ public class Workout {
 	String title;
 	int cbpm;
 	String description;
+	String port;
 	
 	Category category;
 	public Workout() {
@@ -27,6 +28,13 @@ public class Workout {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getPort() {
+		return port;
+	}
+	public void setPort(String port) {
+		this.port = port;
 	}
 	public String getTitle() {
 		return title;

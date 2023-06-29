@@ -29,6 +29,9 @@ public class ActiveWorkoutController {
 	@Autowired
 	ActiveWorkoutRepository activeWorkoutRepository;
 	
+	@Autowired
+	WorkoutServiceProxy workoutServiceProxy;
+	
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addWorkout(@RequestBody ActiveWorkout workout) {
@@ -40,6 +43,24 @@ public class ActiveWorkoutController {
 	@GetMapping("/")
 	public List<ActiveWorkout> fetchAllWorkouts() {
 		return activeWorkoutRepository.findAll();
+	}
+	
+	@GetMapping("/feign/{id}")
+	public ActiveWorkout fetchAllWorkoutsUsingFeign(@PathVariable("id") int id) {
+		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
+		if(activeWorkoutFound.isPresent()) {
+			ActiveWorkout activeWorkout = activeWorkoutFound.get();
+
+			// invoke using open feign
+			Workout workout = workoutServiceProxy.fetchWorkout(activeWorkout.getWorkoutId());
+			
+			System.out.println("Fetched workout from other service : " + workout);
+			activeWorkout.setWorkout(workout);
+			
+			return activeWorkout;
+		}
+		
+		return null;
 	}
 	
 	@GetMapping("/{id}")

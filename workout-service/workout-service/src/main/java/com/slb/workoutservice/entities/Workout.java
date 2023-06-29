@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Workout {
@@ -16,6 +17,10 @@ public class Workout {
 	String title;
 	int cbpm;
 	String description;
+	
+	@Transient
+	String port;
+
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	Category category;
@@ -41,6 +46,14 @@ public class Workout {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	
+	public String getPort() {
+		return port;
+	}
+	public void setPort(String port) {
+		this.port = port;
 	}
 	public int getCbpm() {
 		return cbpm;
