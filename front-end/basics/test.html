@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Some title</title>
+    <link rel="stylesheet" href="./mystyle.css"/>
+</head>
+<body>
+    <div class="red-border">Some text dsgsdgdsds gkdj</div>
+    <h2 id="red-border">Some title</h2>
+    <button onclick="changeTitle()">Change Title</button>
+    <script>
+        function changeTitle(){
+            console.log('change title...');
+            var str = document.getElementById('red-border').innerText;
+            var newstr = str.split('').reverse().join('');
+            document.getElementById('red-border').innerText = newstr
+        }
+    </script>
+</body>
+</html>

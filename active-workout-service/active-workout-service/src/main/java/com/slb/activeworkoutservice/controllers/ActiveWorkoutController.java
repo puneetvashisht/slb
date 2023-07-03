@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.slb.activeworkoutservice.dto.Workout;
 import com.slb.activeworkoutservice.entities.ActiveWorkout;
 import com.slb.activeworkoutservice.repos.ActiveWorkoutRepository;
@@ -46,7 +47,8 @@ public class ActiveWorkoutController {
 	}
 	
 	@GetMapping("/feign/{id}")
-	public ActiveWorkout fetchAllWorkoutsUsingFeign(@PathVariable("id") int id) {
+//	@HystrixCommand(fallbackMethod = "fallbackMethod")
+	public ResponseEntity<ActiveWorkout> fetchAllWorkoutsUsingFeign(@PathVariable("id") int id) {
 		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
 		if(activeWorkoutFound.isPresent()) {
 			ActiveWorkout activeWorkout = activeWorkoutFound.get();
@@ -57,13 +59,14 @@ public class ActiveWorkoutController {
 			System.out.println("Fetched workout from other service : " + workout);
 			activeWorkout.setWorkout(workout);
 			
-			return activeWorkout;
+			return new ResponseEntity<ActiveWorkout>(activeWorkout, HttpStatus.OK);
 		}
 		
 		return null;
 	}
 	
 	@GetMapping("/{id}")
+	@HystrixCommand(fallbackMethod = "fallbackMethod")
 	public ActiveWorkout fetchAllWorkouts(@PathVariable("id") int id) {
 		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
 		if(activeWorkoutFound.isPresent()) {
@@ -89,5 +92,10 @@ public class ActiveWorkoutController {
 		
 		return null;
 	}
+	
+	public ResponseEntity<ActiveWorkout> fallbackMethod(int id) {
+        System.out.println("workout-service is down!!! fallback route enabled...");
+        return new ResponseEntity<ActiveWorkout>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }
