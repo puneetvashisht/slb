@@ -1,0 +1,55 @@
+<html>
+
+<head>
+
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+
+<body onload="displaytime()">
+
+    <p>Current Date and Time is <span id='date-time'></span>.</p>
+    <!--<div class="red-border">Some text dsgsdgdsds gkdj</div>-->
+    <h2 id="red-border">Calculator</h2>
+    <!--<button onclick="changeTitle()">Change Title</button>-->
+    <input type="text" id="FirstNumber"/>
+    <button class="btn btn-primary">+</button>
+    <input type="text" id="SecondNumber"/>
+    <input class="btn btn-primary" type="button" value="=" onclick="add()"/>
+    <input type="text" id="txtresult" name="TextBox3"/>
+
+
+
+    <script>
+
+        function add() {
+            // var one = parseInt(document.getElementById("FirstNumber").value);
+            // var two = parseInt(document.getElementById("SecondNumber").value);
+            // var addition = one + two;
+            // document.getElementById("txtresult").value = addition;
+
+            // $('#FirstNumber').val();
+
+            $('#txtresult').val(parseInt($('#FirstNumber').val()) + parseInt($('#SecondNumber').val()));
+        }
+
+    </script>
+
+    <script>
+
+        function displaytime(){
+            setInterval(function (){
+                var dt = new Date();
+                 var timestr = dt.getHours() + " : " + dt.getMinutes() + " : " + dt.getSeconds();
+                document.getElementById('date-time').innerHTML = timestr;
+            }, 1000)
+           
+
+        }
+       
+    </script>
+<script src="/node_modules/jquery/dist/jquery.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+</body>
+
+</html>
