@@ -1,0 +1,8 @@
+<div class="dropdown">
+    <button (click)="toggleShow()" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{caption}}
+    </button>
+    <ul class="{{show?'dropdown-menu show': 'dropdown-menu'}}">
+      <app-dropdown-item *ngFor="let cuisine of cuisines" [text]="cuisine" (itemClick)="handleItemClickInParent($event)"></app-dropdown-item>
+    </ul>
+  </div>
