@@ -6,6 +6,8 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { DropdownItemComponent } from './dropdown-item/dropdown-item.component';
+import { FirstComponent } from './first/first.component';
+import { SecondComponent } from './second/second.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { DropdownItemComponent } from './dropdown-item/dropdown-item.component';
     ParentComponent,
     ChildComponent,
     DropdownComponent,
-    DropdownItemComponent
+    DropdownItemComponent,
+    FirstComponent,
+    SecondComponent
   ],
   imports: [
     BrowserModule
