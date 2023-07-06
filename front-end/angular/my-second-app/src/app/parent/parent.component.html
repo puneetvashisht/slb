@@ -1,0 +1,7 @@
+<p>parent works!</p>
+<p>Child message: {{childMessage}}</p>
+<button (click)="sayHello()">Say Hi!</button>
+<hr/>
+<app-child [message] = "message" (greet)="handleGreet($event)"></app-child>
+<!-- [] - parent to child : property binding
+() - child to parent : event binding -->

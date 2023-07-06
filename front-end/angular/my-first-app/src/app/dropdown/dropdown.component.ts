@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
+
+ @Input('cuisines') cuisines: Array<string> = []
 
 }

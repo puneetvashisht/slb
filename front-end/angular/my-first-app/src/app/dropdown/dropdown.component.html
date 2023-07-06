@@ -3,8 +3,9 @@
       Select Cuisine
     </button>
     <ul class="dropdown-menu show">
-      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li class="dropdown-item" *ngFor="let cuisine of cuisines">{{cuisine}}</li>
+      <!-- <li><a class="dropdown-item" href="#">Action</a></li>
       <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li> -->
     </ul>
   </div>
