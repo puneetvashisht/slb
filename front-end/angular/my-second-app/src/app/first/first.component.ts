@@ -16,7 +16,6 @@ export class FirstComponent {
     // this.sharedService.messages.push('c');
 
     // immutable version of adding new element 
-    this.sharedService.messages = [...this.sharedService.messages, 'c'];
-    console.log(this.sharedService.messages);
+    this.sharedService.addMessage('c')
   }
 }
