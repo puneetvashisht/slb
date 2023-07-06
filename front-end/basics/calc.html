@@ -19,7 +19,7 @@
     <input class="btn btn-primary" type="button" value="=" onclick="add()"/>
     <input type="text" id="txtresult" name="TextBox3"/>
 
-
+    <button id="load" class="btn btn-primary">Load Emp Data</button>
 
     <script>
 
@@ -36,20 +36,32 @@
 
     </script>
 
-    <script>
-
-        function displaytime(){
-            setInterval(function (){
-                var dt = new Date();
-                 var timestr = dt.getHours() + " : " + dt.getMinutes() + " : " + dt.getSeconds();
-                document.getElementById('date-time').innerHTML = timestr;
-            }, 1000)
-           
-
-        }
-       
-    </script>
 <script src="/node_modules/jquery/dist/jquery.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+<script>
+
+
+$("#load").click(async function(){
+    console.log('button clicked..');
+//   $.ajax({url: "http://localhost:3000/employees", success: function(result){
+//     // $("#div1").html(result);
+//     console.log(result)
+//   }});
+var res = await $.ajax({url: 'http://localhost:3000/employees'})
+// .then(res => console.log(res))
+console.log(res);
+});
+
+
+    function displaytime(){
+        setInterval(function (){
+            var dt = new Date();
+             var timestr = dt.getHours() + " : " + dt.getMinutes() + " : " + dt.getSeconds();
+            document.getElementById('date-time').innerHTML = timestr;
+        }, 1000)
+    }
+   
+</script>
 </body>
 
 </html>
