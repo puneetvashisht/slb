@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ViewPostsComponent } from './view-posts/view-posts.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { AddPostComponent } from './add-post/add-post.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ViewPostsComponent
+    ViewPostsComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,

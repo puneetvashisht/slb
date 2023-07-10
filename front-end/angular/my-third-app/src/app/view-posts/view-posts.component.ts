@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../model/Post';
+import { PostService } from '../post.service';
 @Component({
   selector: 'app-view-posts',
   templateUrl: './view-posts.component.html',
@@ -10,7 +11,7 @@ export class ViewPostsComponent implements OnInit {
 
   posts : Array<Post> = [];
 
-  constructor(private httpClient: HttpClient){
+  constructor(private postService: PostService){
 
   }
   ngOnInit(): void {
@@ -20,17 +21,23 @@ export class ViewPostsComponent implements OnInit {
     //   this.posts = res;
     // })
 
-    this.httpClient.get('http://localhost:3000/posts')
+    this.postService.fetchAllPosts()
     .subscribe((res: any) => {
         this.posts = res;
       })
   }
 
-  loadData(){
-    console.log('Fetch data from server ...')
-    this.httpClient.get('http://localhost:3000/posts').toPromise()
-    .then((res: any) => {
-      this.posts = res;
-    })
+
+  deletePost(id: string){
+    this.postService.deletePost(id)
+    .subscribe(res => {
+      console.log(res);
+      let remainingPosts = this.posts.filter((post)=> post.id != parseInt(id))
+      console.log(remainingPosts);
+      this.posts = remainingPosts;
+      
+    });
+
+    
   }
 }
