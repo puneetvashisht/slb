@@ -1,10 +1,14 @@
 <p>view-posts works!</p>
 <!-- <button (click)="loadData()">Load Data</button> -->
 
+<p>{{posts | json}}</p>
 <ul>
     <li *ngFor="let post of posts">{{post.title}}</li>
 </ul>
-
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Search Title</span>
+  <input #searchtext (keyup)="0" type="search" class="form-control" placeholder="Search Title" aria-label="Username" aria-describedby="basic-addon1">
+</div>
 <table class="table">
     <thead>
       <tr>
@@ -15,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let post of posts; let i = index">
+      <tr  *ngFor="let post of posts | search: searchtext.value; let i = index">
         <th scope="row">{{i + 1}}</th>
         <td>{{post.title}}</td>
         <td>{{post.author}}</td>
