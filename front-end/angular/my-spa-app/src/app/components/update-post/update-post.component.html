@@ -1,0 +1,9 @@
+<p>update-post works!</p>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Author</span>
+    <input #author (keyup)="0" type="text" class="form-control" placeholder="Enter Author" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+   <button (click)="updatePost(author.value)" class="btn btn-primary">Update Post</button>
+  </div>

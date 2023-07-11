@@ -17,6 +17,10 @@ export class PostService {
     return this.httpClient.post(baseUrl, post)
   }
 
+  updatePost(id: string, author: string):  Observable<any> {
+    return this.httpClient.patch(baseUrl + id, {author})
+  }
+
   fetchAllPosts(): Observable<any> {
     return this.httpClient.get(baseUrl)
   }

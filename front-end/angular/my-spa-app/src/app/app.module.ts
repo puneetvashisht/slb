@@ -12,6 +12,7 @@ import { CapitalizePipe } from './services/capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdToastGlobal } from './components/toast/toast-global.component';
+import { UpdatePostComponent } from './components/update-post/update-post.component';
 // import { ToastsContainer } from './components/toast/toast-container.compnent';
 
 
@@ -24,6 +25,7 @@ import { NgbdToastGlobal } from './components/toast/toast-global.component';
     ViewPostsComponent,
     SearchPipe,
     CapitalizePipe,
+    UpdatePostComponent,
 
 
   ],
