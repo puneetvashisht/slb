@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.slb.activeworkoutservice.dto.Workout;
 
-@FeignClient(name="workout-service")
+@FeignClient(name = "workout-service")
+//@RibbonClient(name="some-service")
 public interface WorkoutServiceProxy {
 	@GetMapping(path ="/api/v1/workouts/{id}")
 	public Workout fetchWorkout(@PathVariable("id") int id) ;

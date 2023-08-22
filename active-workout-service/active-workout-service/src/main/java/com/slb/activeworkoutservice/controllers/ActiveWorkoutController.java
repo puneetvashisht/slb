@@ -19,13 +19,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.slb.activeworkoutservice.dto.Workout;
 import com.slb.activeworkoutservice.entities.ActiveWorkout;
 import com.slb.activeworkoutservice.repos.ActiveWorkoutRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/v1/activeworkouts")
+@Slf4j
 public class ActiveWorkoutController {
 	@Autowired
 	ActiveWorkoutRepository activeWorkoutRepository;
@@ -61,12 +63,37 @@ public class ActiveWorkoutController {
 			
 			return new ResponseEntity<ActiveWorkout>(activeWorkout, HttpStatus.OK);
 		}
-		
+		activeWorkoutFound.orElseThrow();
+//		else {
+////			return new ResponseEntity<ActiveWorkout>(HttpStatus.NOT_FOUND);
+//			
+//		}
 		return null;
+		
+		
+//		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
+//		activeWorkoutFound.ifPresentOrElse(new Consumer<Optional<ActiveWorkout>>() {
+//
+//			@Override
+//			public void accept(Optional<ActiveWorkout> activeWorkoutFound) {
+//				// TODO Auto-generated method stub
+//				ActiveWorkout activeWorkout = activeWorkoutFound.get();
+//
+//				// invoke using open feign
+//				Workout workout = workoutServiceProxy.fetchWorkout(activeWorkout.getWorkoutId());
+//				
+//				System.out.println("Fetched workout from other service : " + workout);
+//				activeWorkout.setWorkout(workout);
+//				
+//			}
+//			
+//		}, null);
+//		
+//		return null;
 	}
 	
 	@GetMapping("/{id}")
-	@HystrixCommand(fallbackMethod = "fallbackMethod")
+//	@HystrixCommand(fallbackMethod = "fallbackMethod")
 	public ActiveWorkout fetchAllWorkouts(@PathVariable("id") int id) {
 		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
 		if(activeWorkoutFound.isPresent()) {
