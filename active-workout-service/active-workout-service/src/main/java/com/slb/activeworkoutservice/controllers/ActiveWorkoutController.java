@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.slb.activeworkoutservice.dto.Workout;
+import com.slb.activeworkoutservice.dto.WorkoutDetail;
 import com.slb.activeworkoutservice.entities.ActiveWorkout;
 import com.slb.activeworkoutservice.repos.ActiveWorkoutRepository;
 
@@ -34,6 +35,9 @@ public class ActiveWorkoutController {
 	
 	@Autowired
 	WorkoutServiceProxy workoutServiceProxy;
+	
+	@Autowired
+	WorkoutDetailServiceProxy workoutDetailServiceProxy;
 	
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -52,14 +56,22 @@ public class ActiveWorkoutController {
 //	@HystrixCommand(fallbackMethod = "fallbackMethod")
 	public ResponseEntity<ActiveWorkout> fetchAllWorkoutsUsingFeign(@PathVariable("id") int id) {
 		Optional<ActiveWorkout> activeWorkoutFound = activeWorkoutRepository.findById(id);
+		
 		if(activeWorkoutFound.isPresent()) {
 			ActiveWorkout activeWorkout = activeWorkoutFound.get();
 
 			// invoke using open feign
 			Workout workout = workoutServiceProxy.fetchWorkout(activeWorkout.getWorkoutId());
+			log.info("Workout from other service is --- ", workout);
 			
-			System.out.println("Fetched workout from other service : " + workout);
+			WorkoutDetail workoutDetail = workoutDetailServiceProxy.fetchWorkoutDetail(activeWorkout.getWorkoutId());
+			log.info("Workout Details from other service is --- ", workoutDetail);
+			
+//			System.out.println("Fetched workout from other service : " + workout);
 			activeWorkout.setWorkout(workout);
+			activeWorkout.setWorkoutDetail(workoutDetail);
+			
+			log.info("ActiveWorkout is --- ", activeWorkoutFound);
 			
 			return new ResponseEntity<ActiveWorkout>(activeWorkout, HttpStatus.OK);
 		}

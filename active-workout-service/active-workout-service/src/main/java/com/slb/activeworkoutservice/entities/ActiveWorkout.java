@@ -10,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import com.slb.activeworkoutservice.dto.Workout;
+import com.slb.activeworkoutservice.dto.WorkoutDetail;
+
+import lombok.Data;
 
 @Entity
+@Data
 public class ActiveWorkout {
 	
 	@Id
@@ -23,6 +27,8 @@ public class ActiveWorkout {
 	LocalTime endTime;
 	@Transient
 	Workout workout;
+	@Transient
+	WorkoutDetail workoutDetail;
 	int workoutId;
 	
 	
